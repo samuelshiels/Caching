@@ -100,7 +100,7 @@ def readCache(config):
 	file = buildFile(config)
 	exists = lh.fileExists(file)
 
-	age = 0
+	age = False
 	# File Age
 	if exists:
 		age = (fileAge(lh.fileAge(file)) / 60) < config['time']
