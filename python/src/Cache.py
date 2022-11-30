@@ -101,9 +101,11 @@ def readCache(config):
 	exists = lh.fileExists(file)
 
 	age = False
+	mtimeAge = 0
 	# File Age
 	if exists:
-		age = (fileAge(lh.fileAge(file)) / 60) < config['time']
+		mtimeAge = fileAge(lh.fileAge(file)) / 60
+		age = mtimeAge < config['time']
 
 	content = ''
 	if exists and config['dump']:
@@ -111,6 +113,7 @@ def readCache(config):
 
 	returnJSON = {
 		'valid': age,
+		'fileAge': mtimeAge,
 		'content': content
 	}
 	return returnJSON
