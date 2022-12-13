@@ -49,14 +49,14 @@ def __validateWriteConfig(config):
 		return False
 	return config
 
-def buildFile(config):
+def buildFile(config: dict) -> str:
 	file = ''
 	if config['home']:
 		file = lh.getHomeDirectory()
 	file = os.path.join(file, config['cache'], config['file'])
 	return file
 
-def writeCache(config):
+def writeCache(config: dict) -> dict:
 	'''Using a config object writes content to a cache file
 	home - boolean - use the current users home directory and combine with cache directory
 	cache - string - path to find cache data
@@ -80,13 +80,13 @@ def writeCache(config):
 	}
 	return returnJSON
 
-def fileAge(mtime):
+def fileAge(mtime: int) -> int:
 	'''Uses int'''
 	fileAge = lh.getNow() - mtime
 	return fileAge
 
-def readCache(config):
-	''' Using a config object checks a cache file's existence and age and returns an object representing if the file exists and is older than the given time and the content of the file if requested
+def readCache(config: dict) -> dict:
+	''' Using a config object checks a cache file's existence and age and returns an object representing if the file exists and is older than the given time and the content of the file if requested. Returns either False or an object with valid:bool fileAge:int(mins) content:string|list
 	home - boolean - use the current users home directory and combine with cache directory
 	cache - string - path to find cache data
 	fileName - string - name of the file to check
@@ -118,7 +118,7 @@ def readCache(config):
 	}
 	return returnJSON
 
-def main():
+def main() -> dict:
 	args = __init_argparse()
 	config = {
 		'home':args.use_home,
