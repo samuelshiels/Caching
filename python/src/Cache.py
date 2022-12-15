@@ -1,7 +1,6 @@
 import argparse
 import os
 import LinuxHelper as lh
-import time
 
 def __init_argparse() -> argparse.ArgumentParser:
 
@@ -82,8 +81,8 @@ def writeCache(config: dict) -> dict:
 
 def fileAge(mtime: int) -> int:
 	'''Uses int'''
-	fileAge = lh.getNow() - mtime
-	return fileAge
+	retVal = lh.getNow() - mtime
+	return retVal
 
 def readCache(config: dict) -> dict:
 	''' Using a config object checks a cache file's existence and age and returns an object representing if the file exists and is older than the given time and the content of the file if requested. Returns either False or an object with valid:bool fileAge:int(mins) content:string|list
